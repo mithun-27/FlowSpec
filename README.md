@@ -15,6 +15,30 @@
 
 ---
 
+## Current Status
+
+**⚠️ Under active development — the compiler is not implemented yet.**
+
+The repository currently contains the complete project structure, packaging
+and CI configuration, design documentation, and an honest placeholder
+skeleton for every planned module. What works today:
+
+- Installing the package from source (`pip install -e .`)
+- `flowspec version`
+- The development toolchain (pytest, Ruff, mypy) and CI
+
+What does not work yet: every compiler feature — workflow parsing, type
+checking, dependency analysis, diagnostics, and IR generation. All planned
+commands other than `version` report that they are not implemented and exit
+with code 4.
+
+See the live implementation checklist in
+[`docs/PROGRESS.md`](docs/PROGRESS.md) for exactly what is real versus
+planned, and [`examples/invoice_processing`](examples/invoice_processing/)
+for the example project the first release will compile.
+
+---
+
 ## What is FlowSpec?
 
 AI agents can plan complex sequences of tool calls, but can those sequences actually execute successfully?
