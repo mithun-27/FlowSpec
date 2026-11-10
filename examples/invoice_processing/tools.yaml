@@ -1,0 +1,106 @@
+# Invoice processing — tool registry
+#
+# Tool definitions for the invoice automation example.
+# Every tool declares explicit input and output contracts, effects, and
+# permissions. Taken from the FlowSpec specification (§5.3).
+#
+# NOTE: FlowSpec cannot compile this file yet — the compiler is not
+# implemented. See docs/PROGRESS.md.
+
+version: "1.0"
+
+tools:
+
+  get_customer:
+
+    description: Find a customer using email.
+
+    inputs:
+      email:
+        type: string
+        required: true
+
+    outputs:
+      customer_id:
+        type: CustomerID
+        nullable: false
+
+      email:
+        type: string
+
+    effects:
+      - read
+
+    permissions:
+      - customers.read
+
+
+  create_invoice:
+
+    description: Create an invoice.
+
+    inputs:
+      customer_id:
+        type: CustomerID
+        required: true
+
+      amount:
+        type: float
+        required: true
+
+    outputs:
+      invoice_id:
+        type: InvoiceID
+
+      payment_id:
+        type: PaymentID
+
+    effects:
+      - write
+
+    permissions:
+      - invoices.create
+
+
+  send_invoice:
+
+    description: Send invoice to customer.
+
+    inputs:
+      invoice_id:
+        type: InvoiceID
+        required: true
+
+    outputs:
+      status:
+        type: string
+
+    effects:
+      - external_write
+
+    permissions:
+      - invoices.send
+
+
+  update_payment_status:
+
+    description: Update payment status.
+
+    inputs:
+      payment_id:
+        type: PaymentID
+        required: true
+
+      status:
+        type: string
+        required: true
+
+    outputs:
+      updated:
+        type: boolean
+
+    effects:
+      - write
+
+    permissions:
+      - payments.update

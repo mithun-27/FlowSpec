@@ -1,0 +1,84 @@
+# Invoice processing — INVALID workflow (do not "fix")
+#
+# This workflow is deliberately broken for testing the compiler's
+# failure paths. Once FlowSpec v0.1.0 is implemented, compiling this file
+# must fail with (at least) the diagnostics listed in README.md.
+#
+# NOTE: FlowSpec cannot compile this file yet — the compiler is not
+# implemented. See docs/PROGRESS.md.
+
+version: "1.0"
+
+workflow:
+
+  name: invoice_processing_invalid
+
+  description: Invalid variant of the invoice processing workflow.
+
+  inputs:
+
+    email:
+      type: string
+      required: true
+
+    amount:
+      type: float
+      required: true
+
+  steps:
+
+    - id: customer
+      tool: get_customer
+
+      inputs:
+        email: $input.email
+
+
+    - id: invoice
+      tool: create_invoice
+
+      inputs:
+        customer_id: $customer.customer_id
+        amount: $input.amount
+
+
+    - id: send
+      tool: send_invoice
+
+      inputs:
+        # BUG 1 (E202): $customer.customer_id is a CustomerID, but
+        # send_invoice.invoice_id requires an InvoiceID — nominal type
+        # mismatch.
+        invoice_id: $customer.customer_id
+
+
+    - id: payment
+      tool: update_payment_status
+
+      inputs:
+        payment_id: $invoice.payment_id
+        status: "pending"
+
+
+    # BUG 2 (E304): this step ID duplicates the "payment" step above.
+    - id: payment
+      tool: update_payment_status
+
+      inputs:
+        payment_id: $invoice.payment_id
+        status: "pending"
+
+
+    # BUG 3 (E401): delete_customer is not registered in tools.yaml.
+    # BUG 4 (E201): $send.updated is a boolean, but customer_id requires
+    # a CustomerID.
+    - id: ghost
+      tool: delete_customer
+
+      inputs:
+        customer_id: $send.updated
+
+  outputs:
+
+    invoice_id: $invoice.invoice_id
+    payment_updated: $payment.updated

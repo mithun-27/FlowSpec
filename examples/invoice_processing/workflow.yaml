@@ -1,0 +1,62 @@
+# Invoice processing — valid workflow
+#
+# Complete invoice processing workflow. Every required tool input is
+# supplied, every reference resolves, and every type is compatible.
+# Taken from the FlowSpec specification (§5.4).
+#
+# NOTE: FlowSpec cannot compile this file yet — the compiler is not
+# implemented. See docs/PROGRESS.md.
+
+version: "1.0"
+
+workflow:
+
+  name: invoice_processing
+
+  description: Complete invoice processing workflow.
+
+  inputs:
+
+    email:
+      type: string
+      required: true
+
+    amount:
+      type: float
+      required: true
+
+  steps:
+
+    - id: customer
+      tool: get_customer
+
+      inputs:
+        email: $input.email
+
+
+    - id: invoice
+      tool: create_invoice
+
+      inputs:
+        customer_id: $customer.customer_id
+        amount: $input.amount
+
+
+    - id: send
+      tool: send_invoice
+
+      inputs:
+        invoice_id: $invoice.invoice_id
+
+
+    - id: payment
+      tool: update_payment_status
+
+      inputs:
+        payment_id: $invoice.payment_id
+        status: "pending"
+
+  outputs:
+
+    invoice_id: $invoice.invoice_id
+    payment_updated: $payment.updated
