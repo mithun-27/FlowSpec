@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and discussions
+    url: https://github.com/mithun-27/FlowSpec/discussions
+    about: Ask questions and discuss FlowSpec design and usage.
+  - name: Security vulnerabilities
+    url: https://github.com/mithun-27/FlowSpec/security
+    about: Report security issues privately — do not open public issues for vulnerabilities.
