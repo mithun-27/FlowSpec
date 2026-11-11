@@ -21,11 +21,10 @@ from flowspec.ast.workflow import ToolCallNode, WorkflowNode
 from flowspec.config import CompilerConfig
 from flowspec.diagnostics.error_codes import ErrorCodes
 from flowspec.diagnostics.models import Diagnostic, Severity
-from flowspec.registry.tool_registry import ParameterSpec, ToolDefinition, ToolRegistry
+from flowspec.registry.tool_registry import ToolDefinition, ToolRegistry
 from flowspec.typesystem.inference import TypeInference, infer_expression_types
 from flowspec.typesystem.symbols import SymbolTable
 from flowspec.typesystem.type_checker import TypeChecker
-from flowspec.typesystem.types import GenericType, Type, is_optional
 
 __all__ = ["SemanticAnalyzer"]
 
@@ -116,7 +115,7 @@ class SemanticAnalyzer:
             if source_type is None:
                 continue  # unresolved reference already reported (E102/E103)
 
-            target_type = _effective_target(parameter)
+            target_type = parameter.effective_type
             result = self.checker.check_assignment(source_type, target_type)
             if not result.compatible:
                 diagnostics.append(
@@ -137,10 +136,3 @@ def _expected_arguments(tool: ToolDefinition) -> str:
     if not tool.input_names:
         return "no inputs"
     return f"one of: {', '.join(tool.input_names)}"
-
-
-def _effective_target(parameter: ParameterSpec) -> Type:
-    """Nullable parameters accept null: their effective type is Optional[T]."""
-    if parameter.nullable and not is_optional(parameter.type):
-        return GenericType("Optional", (parameter.type,))
-    return parameter.type

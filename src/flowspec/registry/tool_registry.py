@@ -15,7 +15,7 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 
 from flowspec.exceptions import DuplicateToolError
-from flowspec.typesystem.types import NominalType, Type
+from flowspec.typesystem.types import GenericType, NominalType, Type, is_optional
 
 __all__ = ["ParameterSpec", "ToolDefinition", "ToolRegistry"]
 
@@ -28,6 +28,18 @@ class ParameterSpec:
     type: Type
     required: bool = True
     nullable: bool = False
+
+    @property
+    def effective_type(self) -> Type:
+        """The parameter's type with nullability made explicit.
+
+        A ``nullable`` parameter accepts null, so its effective type for
+        compatibility checks is ``Optional[T]`` — the single rule every
+        consumer (semantic analysis, constraints, inference) shares.
+        """
+        if self.nullable and not is_optional(self.type):
+            return GenericType("Optional", (self.type,))
+        return self.type
 
 
 @dataclass(frozen=True)
