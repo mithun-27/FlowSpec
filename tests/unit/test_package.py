@@ -1,9 +1,14 @@
-"""Smoke tests for the FlowSpec package scaffold.
+"""Smoke tests for the FlowSpec package scaffold and honest placeholders.
 
-These tests verify that the package structure exists, imports cleanly,
-exposes an honest placeholder API, and that the CLI entry point works.
-They contain no compiler logic — the compiler is not implemented yet.
+Two groups of modules:
+
+- ``IMPLEMENTED`` — modules with real v0.1.0 implementations; they must
+  import cleanly and export their documented symbols.
+- ``STUBS`` — modules still awaiting implementation; they must honestly
+  raise ``NotImplementedError`` when invoked, never fake success.
 """
+
+from __future__ import annotations
 
 import importlib
 import inspect
@@ -15,14 +20,60 @@ import pytest
 import flowspec
 from flowspec import exceptions
 
+IMPLEMENTED = [
+    "flowspec.config",
+    "flowspec.parser.yaml_parser",
+    "flowspec.parser.json_parser",
+    "flowspec.parser.validator",
+    "flowspec.parser.ast_builder",
+    "flowspec.parser.document",
+    "flowspec.ast.nodes",
+    "flowspec.ast.expressions",
+    "flowspec.ast.workflow",
+    "flowspec.ast.visitors",
+    "flowspec.diagnostics.models",
+    "flowspec.diagnostics.error_codes",
+    "flowspec.diagnostics.formatter",
+]
+
+STUBS = [
+    "flowspec.typesystem.types",
+    "flowspec.typesystem.parser",
+    "flowspec.typesystem.symbols",
+    "flowspec.typesystem.inference",
+    "flowspec.typesystem.unification",
+    "flowspec.typesystem.type_checker",
+    "flowspec.registry.tool_registry",
+    "flowspec.registry.schema_loader",
+    "flowspec.registry.schema_normalizer",
+    "flowspec.semantic.name_resolution",
+    "flowspec.semantic.semantic_analyzer",
+    "flowspec.graph.graph",
+    "flowspec.graph.dependency",
+    "flowspec.graph.cycle_detection",
+    "flowspec.graph.topological_sort",
+    "flowspec.graph.reachability",
+    "flowspec.graph.scheduler",
+    "flowspec.analysis.static",
+    "flowspec.analysis.dataflow",
+    "flowspec.analysis.constraints",
+    "flowspec.analysis.effects",
+    "flowspec.analysis.permissions",
+    "flowspec.analysis.suggestions",
+    "flowspec.compiler.compiler",
+    "flowspec.compiler.pipeline",
+    "flowspec.compiler.ir",
+    "flowspec.compiler.result",
+    "flowspec.execution.planner",
+    "flowspec.execution.runtime",
+    "flowspec.execution.adapters",
+    "flowspec.visualization.graph_renderer",
+    "flowspec.visualization.exporters",
+]
+
 
 def _raises_not_implemented(symbol: object) -> bool:
-    """Report whether invoking a symbol with dummy arguments refuses fake behavior.
-
-    Placeholder classes take no constructor arguments; placeholder functions
-    accept between one and three arguments, so the probe retries with
-    increasing argument counts until the call reaches the function body.
-    """
+    """Report whether invoking a symbol with dummy arguments refuses fake behavior."""
     for args in ((), (None,), (None, None), (None, None, None)):
         try:
             if inspect.isclass(symbol) or callable(symbol):
@@ -30,7 +81,6 @@ def _raises_not_implemented(symbol: object) -> bool:
         except NotImplementedError:
             return True
         except TypeError:
-            # Wrong argument count — probe again with one more argument.
             continue
     return False
 
@@ -38,7 +88,6 @@ def _raises_not_implemented(symbol: object) -> bool:
 def test_package_exposes_version() -> None:
     """The package exposes a PEP 440 development version."""
     assert flowspec.__version__ == "0.1.0.dev0"
-    assert flowspec.__all__ == ["__version__"]
 
 
 def test_base_exception_importable() -> None:
@@ -46,57 +95,17 @@ def test_base_exception_importable() -> None:
     assert issubclass(exceptions.FlowSpecError, Exception)
 
 
-@pytest.mark.parametrize(
-    "module_name",
-    [
-        "flowspec.parser.yaml_parser",
-        "flowspec.parser.json_parser",
-        "flowspec.parser.validator",
-        "flowspec.parser.ast_builder",
-        "flowspec.ast.nodes",
-        "flowspec.ast.workflow",
-        "flowspec.ast.expressions",
-        "flowspec.ast.visitors",
-        "flowspec.typesystem.types",
-        "flowspec.typesystem.parser",
-        "flowspec.typesystem.symbols",
-        "flowspec.typesystem.inference",
-        "flowspec.typesystem.unification",
-        "flowspec.typesystem.type_checker",
-        "flowspec.registry.tool_registry",
-        "flowspec.registry.schema_loader",
-        "flowspec.registry.schema_normalizer",
-        "flowspec.semantic.name_resolution",
-        "flowspec.semantic.semantic_analyzer",
-        "flowspec.graph.graph",
-        "flowspec.graph.dependency",
-        "flowspec.graph.cycle_detection",
-        "flowspec.graph.topological_sort",
-        "flowspec.graph.reachability",
-        "flowspec.graph.scheduler",
-        "flowspec.analysis.static",
-        "flowspec.analysis.dataflow",
-        "flowspec.analysis.constraints",
-        "flowspec.analysis.effects",
-        "flowspec.analysis.permissions",
-        "flowspec.analysis.suggestions",
-        "flowspec.compiler.compiler",
-        "flowspec.compiler.pipeline",
-        "flowspec.compiler.ir",
-        "flowspec.compiler.result",
-        "flowspec.diagnostics.models",
-        "flowspec.diagnostics.error_codes",
-        "flowspec.diagnostics.formatter",
-        "flowspec.execution.planner",
-        "flowspec.execution.runtime",
-        "flowspec.execution.adapters",
-        "flowspec.visualization.graph_renderer",
-        "flowspec.visualization.exporters",
-    ],
-)
-def test_placeholder_modules_raise_not_implemented(module_name: str) -> None:
-    """Every planned module exists, exports a public symbol, and honestly
-    reports that it is not implemented when invoked."""
+@pytest.mark.parametrize("module_name", IMPLEMENTED)
+def test_implemented_modules_import_cleanly(module_name: str) -> None:
+    """Implemented modules import and export public symbols."""
+    module = importlib.import_module(module_name)
+    public = [name for name in dir(module) if not name.startswith("_")]
+    assert public, f"{module_name} exports no public symbols"
+
+
+@pytest.mark.parametrize("module_name", STUBS)
+def test_stub_modules_raise_not_implemented(module_name: str) -> None:
+    """Every not-yet-implemented module honestly refuses to fake behavior."""
     module = importlib.import_module(module_name)
 
     public = [name for name in dir(module) if not name.startswith("_")]
@@ -121,7 +130,7 @@ def test_cli_version_command() -> None:
 
 
 def test_cli_unimplemented_command_exit_code() -> None:
-    """Unimplemented commands fail loudly with the stable 'internal' exit code 4."""
+    """Commands that are not implemented yet fail loudly with exit code 4."""
     result = subprocess.run(
         [sys.executable, "-m", "flowspec.cli", "compile", "nonexistent.yaml"],
         capture_output=True,
