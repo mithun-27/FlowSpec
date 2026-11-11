@@ -43,18 +43,18 @@ IMPLEMENTED = [
     "flowspec.typesystem.inference",
     "flowspec.registry.tool_registry",
     "flowspec.registry.schema_loader",
-]
-
-STUBS = [
-    "flowspec.registry.schema_normalizer",
     "flowspec.semantic.name_resolution",
     "flowspec.semantic.semantic_analyzer",
     "flowspec.graph.graph",
     "flowspec.graph.dependency",
     "flowspec.graph.cycle_detection",
     "flowspec.graph.topological_sort",
-    "flowspec.graph.reachability",
     "flowspec.graph.scheduler",
+]
+
+STUBS = [
+    "flowspec.registry.schema_normalizer",
+    "flowspec.graph.reachability",
     "flowspec.analysis.static",
     "flowspec.analysis.dataflow",
     "flowspec.analysis.constraints",

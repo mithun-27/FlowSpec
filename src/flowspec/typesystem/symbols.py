@@ -29,11 +29,17 @@ class InputSymbol:
 
 @dataclass(frozen=True)
 class StepSymbol:
-    """A declared workflow step and its tool's output contract."""
+    """A declared workflow step and its tool's output contract.
+
+    ``contract_known`` is ``False`` when the step's tool is not registered:
+    the step exists for reference purposes, but its outputs cannot be
+    validated — the unknown tool is itself already reported (E401).
+    """
 
     id: str
     tool: str
     outputs: dict[str, ParameterSpec]
+    contract_known: bool = True
 
 
 @dataclass(frozen=True)
