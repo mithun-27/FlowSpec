@@ -56,6 +56,8 @@ IMPLEMENTED = [
     "flowspec.compiler.pipeline",
     "flowspec.compiler.ir",
     "flowspec.compiler.result",
+    "flowspec.visualization.exporters",
+    "flowspec.cli",
 ]
 
 STUBS = [
@@ -69,7 +71,6 @@ STUBS = [
     "flowspec.execution.runtime",
     "flowspec.execution.adapters",
     "flowspec.visualization.graph_renderer",
-    "flowspec.visualization.exporters",
 ]
 
 
@@ -94,6 +95,33 @@ def test_package_exposes_version() -> None:
 def test_base_exception_importable() -> None:
     """The structured exception base class is importable."""
     assert issubclass(exceptions.FlowSpecError, Exception)
+
+
+def test_public_api_exports() -> None:
+    """Every documented public API name is importable from the package root."""
+    for name in flowspec.__all__:
+        assert getattr(flowspec, name, None) is not None, name
+
+
+@pytest.mark.parametrize(
+    ("command", "args"),
+    [
+        ("test", []),
+        ("graph", ["workflow.yaml"]),
+        ("validate-mcp", []),
+        ("validate-openapi", ["openapi.json"]),
+    ],
+)
+def test_cli_unimplemented_command_exit_code(command: str, args: list[str]) -> None:
+    """Commands that are not implemented yet fail loudly with exit code 4."""
+    result = subprocess.run(
+        [sys.executable, "-m", "flowspec.cli", command, *args],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 4
+    assert "not implemented" in result.stderr.lower()
 
 
 @pytest.mark.parametrize("module_name", IMPLEMENTED)
@@ -128,15 +156,3 @@ def test_cli_version_command() -> None:
     )
     assert result.returncode == 0
     assert f"FlowSpec {flowspec.__version__}" in result.stdout
-
-
-def test_cli_unimplemented_command_exit_code() -> None:
-    """Commands that are not implemented yet fail loudly with exit code 4."""
-    result = subprocess.run(
-        [sys.executable, "-m", "flowspec.cli", "compile", "nonexistent.yaml"],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    assert result.returncode == 4
-    assert "not implemented" in result.stderr.lower()

@@ -18,7 +18,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 
-from flowspec import __version__
+from flowspec._version import __version__
 from flowspec.ast.expressions import describe_expression
 from flowspec.ast.workflow import WorkflowNode
 from flowspec.graph.graph import WorkflowGraph

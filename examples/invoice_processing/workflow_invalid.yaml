@@ -57,21 +57,27 @@ workflow:
 
       inputs:
         payment_id: $invoice.payment_id
-        status: "pending"
+
+        # BUG 4 (E201): $input.amount is a float, but
+        # update_payment_status.status requires a string — type
+        # mismatch.
+        status: $input.amount
 
 
     # BUG 2 (E304): this step ID duplicates the "payment" step above.
+    # It also repeats BUG 4's E201 status type mismatch.
     - id: payment
       tool: update_payment_status
 
       inputs:
         payment_id: $invoice.payment_id
-        status: "pending"
+        status: $input.amount
 
 
     # BUG 3 (E401): delete_customer is not registered in tools.yaml.
-    # BUG 4 (E201): $send.updated is a boolean, but customer_id requires
-    # a CustomerID.
+    # BUG 5 (E102): $send.updated is not an output of send_invoice —
+    # that tool declares only 'status' — so the reference cannot be
+    # resolved.
     - id: ghost
       tool: delete_customer
 

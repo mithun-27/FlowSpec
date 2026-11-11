@@ -70,11 +70,11 @@ def test_invalid_example_fails_with_expected_diagnostics(
     result = Compiler().compile(invoice_example_dir / "workflow_invalid.yaml")
 
     assert not result.success
-    assert _codes(result) == ["E102", "E202", "E304", "E401"]
-    assert result.error_count == 4
+    assert _codes(result) == ["E102", "E201", "E201", "E202", "E304", "E401"]
+    assert result.error_count == 6
     assert result.ir is None
     assert result.workflow_name == "invoice_processing_invalid"
-    assert result.summary() == "4 errors"
+    assert result.summary() == "6 errors"
 
 
 def test_invalid_example_diagnostics_are_stable(invoice_example_dir: Path) -> None:

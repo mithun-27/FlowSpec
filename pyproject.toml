@@ -76,7 +76,7 @@ Issues = "https://github.com/mithun-27/FlowSpec/issues"
 Changelog = "https://github.com/mithun-27/FlowSpec/blob/main/CHANGELOG.md"
 
 [tool.hatch.version]
-path = "src/flowspec/__init__.py"
+path = "src/flowspec/_version.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/flowspec"]

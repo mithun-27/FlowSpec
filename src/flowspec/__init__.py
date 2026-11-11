@@ -5,27 +5,53 @@ their tool contracts, checks data types, resolves dependencies, detects
 structural errors, and generates a validated intermediate representation and
 dependency-aware execution plan.
 
-Current status: project scaffolding. The compiler pipeline is **not
-implemented yet**. Every module in the planned architecture exists as an
-honest placeholder that documents its responsibility and raises
-``NotImplementedError`` when used. See ``docs/PROGRESS.md`` for the
-implementation checklist.
+Current status: the v0.1.0 compiler foundation is implemented — source
+parsing, AST construction, name resolution, semantic analysis, type
+inference and checking, dependency graphs, cycle detection, topological
+scheduling, constraint analysis, versioned IR generation, and the CLI
+(``flowspec compile`` and friends). Integrations (MCP, OpenAPI, Python tool
+registration), the execution runtime, and visualization rendering are
+planned for later releases. See ``docs/PROGRESS.md``.
 
-Planned public API (see ``docs/api_reference.md``):
+Public API (see ``docs/api_reference.md``):
 
-- ``Compiler``
-- ``CompilerConfig``
-- ``CompilationResult``
-- ``IntermediateRepresentation``
-- ``Workflow``
-- ``ToolDefinition``
-- ``ToolRegistry``
-- ``Type``
-- ``TypeChecker``
-- ``WorkflowGraph``
-- ``Diagnostic``
+- ``Compiler`` — the compiler facade.
+- ``CompilerConfig`` — pipeline configuration.
+- ``CompilationPipeline`` — pass orchestration.
+- ``CompilationResult`` — success with IR, or failure with diagnostics.
+- ``IntermediateRepresentation`` — versioned, deterministic compiled output.
+- ``WorkflowNode`` — the parsed workflow representation.
+- ``ToolDefinition`` / ``ToolRegistry`` — tool contracts and the registry.
+- ``Type`` / ``TypeChecker`` — FlowSpec types and compatibility checking.
+- ``WorkflowGraph`` — the dependency graph.
+- ``Diagnostic`` — structured error information.
 """
 
-__version__ = "0.1.0.dev0"
+from flowspec._version import __version__
+from flowspec.ast.workflow import WorkflowNode
+from flowspec.compiler.compiler import Compiler
+from flowspec.compiler.ir import IntermediateRepresentation
+from flowspec.compiler.pipeline import CompilationPipeline
+from flowspec.compiler.result import CompilationResult
+from flowspec.config import CompilerConfig
+from flowspec.diagnostics.models import Diagnostic
+from flowspec.graph.graph import WorkflowGraph
+from flowspec.registry.tool_registry import ToolDefinition, ToolRegistry
+from flowspec.typesystem.type_checker import TypeChecker
+from flowspec.typesystem.types import Type
 
-__all__ = ["__version__"]
+__all__ = [
+    "CompilationPipeline",
+    "CompilationResult",
+    "Compiler",
+    "CompilerConfig",
+    "Diagnostic",
+    "IntermediateRepresentation",
+    "ToolDefinition",
+    "ToolRegistry",
+    "Type",
+    "TypeChecker",
+    "WorkflowGraph",
+    "WorkflowNode",
+    "__version__",
+]
