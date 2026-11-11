@@ -10,6 +10,8 @@ printing output. Submodules:
 - ``permissions`` — declared permission checking.
 - ``suggestions`` — deterministic correction suggestions.
 
-Status: planned for v0.1.0 (core analyzers) and v0.2.0 (advanced); see
-``docs/PROGRESS.md``.
+Status: ``static`` and ``constraints`` are implemented for the v0.1.0
+compiler foundation; ``dataflow`` and ``effects`` are planned for
+v0.2.0, ``permissions`` for v0.2.0, and ``suggestions`` for v0.4.0.
+See ``docs/PROGRESS.md``.
 """

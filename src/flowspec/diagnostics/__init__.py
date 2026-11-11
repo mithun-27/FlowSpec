@@ -11,5 +11,6 @@ Submodules:
 The core compiler must never depend on Rich; terminal formatting lives in
 the CLI layer only.
 
-Status: planned for v0.1.0; see ``docs/PROGRESS.md``.
+Status: implemented for the v0.1.0 compiler foundation; see
+``docs/PROGRESS.md``.
 """

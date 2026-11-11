@@ -1,4 +1,4 @@
-"""Format-independent abstract syntax tree for FlowSpec workflows.
+"""Workflow language AST — the format-independent representation of FlowSpec workflows.
 
 The AST represents parsed workflows independently of the source YAML/JSON
 format. Submodules:
@@ -8,5 +8,6 @@ format. Submodules:
 - ``expressions`` — expression nodes (references, literals).
 - ``visitors`` — visitor protocol for compiler passes.
 
-Status: planned for v0.1.0; see ``docs/PROGRESS.md``.
+Status: implemented for the v0.1.0 compiler foundation; see
+``docs/PROGRESS.md``.
 """

@@ -1,8 +1,8 @@
 # Workflow Language
 
-> **Design document — implementation pending.** This document describes
-> the planned YAML/JSON workflow schemas of FlowSpec. See
-> [PROGRESS.md](PROGRESS.md) for what is implemented today.
+> **Implemented for the v0.1.0 compiler foundation.** This document
+> describes the YAML/JSON workflow schemas of FlowSpec as they are
+> implemented today. See [PROGRESS.md](PROGRESS.md) for the live status.
 
 FlowSpec's first release deliberately avoids inventing a programming
 language. Workflows are **data** — YAML or JSON documents with a stable,

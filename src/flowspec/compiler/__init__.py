@@ -9,5 +9,6 @@ Submodules:
 
 Compilation never executes tools; only an explicit runtime invocation may.
 
-Status: planned for v0.1.0; see ``docs/PROGRESS.md``.
+Status: implemented for the v0.1.0 compiler foundation; see
+``docs/PROGRESS.md``.
 """

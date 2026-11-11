@@ -1,8 +1,8 @@
 # Type System
 
-> **Design document — implementation pending.** This document describes
-> the planned FlowSpec type system. See [PROGRESS.md](PROGRESS.md) for
-> what is implemented today.
+> **Implemented for the v0.1.0 compiler foundation.** This document
+> describes the FlowSpec type system as it is implemented today. See
+> [PROGRESS.md](PROGRESS.md) for the live status.
 
 The type system is owned by FlowSpec — Pydantic and JSON Schema may
 validate external structures, but semantic type checking is FlowSpec's

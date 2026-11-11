@@ -1,8 +1,9 @@
 # Error Codes
 
-> **Design document — implementation pending.** This document describes
-> the planned diagnostic codes of FlowSpec. See [PROGRESS.md](PROGRESS.md)
-> for what is implemented today.
+> **Implemented for the v0.1.0 compiler foundation.** This document
+> describes the diagnostic codes of FlowSpec; the codes the current
+> compiler emits are covered by tests. See [PROGRESS.md](PROGRESS.md)
+> for the live status.
 
 Diagnostic codes are part of FlowSpec's public contract: codes are stable,
 never reused, and never renamed.

@@ -15,7 +15,7 @@ cd FlowSpec
 python -m venv .venv
 
 # Windows (PowerShell)
-.venv\Scripts\activate
+.venv\\Scripts\\activate
 
 # Linux / macOS
 source .venv/bin/activate
@@ -55,6 +55,10 @@ Python commands directly — every target maps to one:
 - Use `pathlib` and cross-platform Python; the development environment may be
   Windows.
 - Every module starts with a docstring stating its responsibility and status.
+- Any new module should be documented in `docs/PROGRESS.md` with its initial
+  status (implementing, planned, etc.) and its expected progress gate.
+- The v0.1.0 compiler foundation is complete; later milestones remain
+  design documents, not implementation contracts.
 
 ## Testing policy
 
@@ -76,9 +80,12 @@ implemented when it is not.**
 
 - Placeholders raise `NotImplementedError` — they never return fake success.
 - When you implement or change a feature, update `docs/PROGRESS.md` in the
-  same pull request.
+same pull request.
 - Documentation must match implementation; delete or mark outdated docs rather
-  than leaving stale instructions.
+than leaving stale instructions.
+- The `src/flowspec/__init__.py` re-exports the public API; every documented
+public symbol must be present here; never add a symbol without updating this
+facade.
 
 ## Pull requests
 
@@ -87,6 +94,8 @@ implemented when it is not.**
   commit messages (`feat:`, `fix:`, `docs:`, `test:`, `chore:`, ...).
 - Fill in the pull request template, including the checklist.
 - CI must pass: Ruff lint, Ruff format check, and pytest on Linux and Windows.
+- Update the changelog in `CHANGELOG.md` under `[Unreleased]` with a clear
+  section (`Added`, `Changed`, `Fixed`, `Removed`) and a description.
 
 ## Reporting bugs and security issues
 

@@ -6,5 +6,7 @@ Submodules:
 - ``schema_loader`` — loading tool schemas from YAML/JSON files.
 - ``schema_normalizer`` — normalizing external schemas into FlowSpec types.
 
-Status: planned for v0.1.0; see ``docs/PROGRESS.md``.
+Status: ``tool_registry`` and ``schema_loader`` are implemented for the
+v0.1.0 compiler foundation; ``schema_normalizer`` is planned for
+v0.3.0. See ``docs/PROGRESS.md``.
 """

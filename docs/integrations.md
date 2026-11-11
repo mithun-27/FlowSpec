@@ -1,8 +1,8 @@
 # Integrations
 
-> **Design document — implementation pending.** This document describes
-> the planned external integrations of FlowSpec. See [PROGRESS.md](PROGRESS.md)
-> for what is implemented today.
+> **Design document — implementation pending (v0.3.0+).** This document
+> describes the planned external integrations of FlowSpec. None of them
+> exist yet. See [PROGRESS.md](PROGRESS.md) for what is implemented today.
 
 ## Model Context Protocol (MCP) — v0.3.0
 

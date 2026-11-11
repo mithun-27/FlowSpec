@@ -1,8 +1,8 @@
 # Getting Started
 
-> **Status: the compiler is not implemented yet.** This page describes
-> how to set up the repository for development today and what you will be
-> able to do once v0.1.0 ships. See [PROGRESS.md](PROGRESS.md).
+> **Status: the v0.1.0 compiler foundation is implemented.** This page
+> shows how to set up the repository and compile your first workflow
+> today. See [PROGRESS.md](PROGRESS.md) for what is real versus planned.
 
 ## Installation
 
@@ -27,45 +27,69 @@ python -m pip install -e ".[dev]"
 ## What works today
 
 ```bash
-flowspec version     # Prints the package version
-python -m pytest     # Runs the test suite
-python -m ruff check src tests
-```
-
-Every other CLI command honestly reports that it is not implemented yet
-and exits with code 4.
-
-## What v0.1.0 will provide
-
-```bash
-# Initialize a FlowSpec project
+# Initialize, scaffold, and verify a new FlowSpec project
 flowspec init
 
 # Inspect a tool registry
-flowspec inspect tools.yaml
+flowspec inspect examples/invoice_processing/tools.yaml
 
 # Compile a workflow (the core deliverable)
-flowspec compile workflow.yaml
+flowspec compile examples/invoice_processing/workflow.yaml
 
-# Explain dependency relationships
-flowspec explain workflow.yaml
+# Explain dependency relationships and parameter origins
+flowspec explain examples/invoice_processing/workflow.yaml
 
-# Export the intermediate representation
-flowspec compile workflow.yaml --emit-ir compiled.json
+# Export the intermediate representation as deterministic JSON
+flowspec export examples/invoice_processing/workflow.yaml
 ```
+
+Compiling the example prints:
+
+```text
+invoice_processing: compiled successfully
+steps: 4
+execution order: customer -> invoice -> payment -> send
+execution stages: customer, invoice, payment/send
+```
+
+An invalid workflow fails with structured diagnostics and exit code 1:
+
+```bash
+flowspec compile examples/invoice_processing/workflow_invalid.yaml
+```
+
+The Python API works the same way:
 
 ```python
 from flowspec import Compiler
 
-compiler = Compiler(tools="tools.yaml")
-result = compiler.compile("workflow.yaml")
+compiler = Compiler()
+result = compiler.compile(
+    "examples/invoice_processing/workflow.yaml",
+    tools_path="examples/invoice_processing/tools.yaml",
+)
+
+print(result.success)          # True
+print(result.execution_order)  # ('customer', 'invoice', 'payment', 'send')
+```
+
+Commands not implemented yet (`test`, `graph`, `validate-mcp`,
+`validate-openapi`) report that honestly and exit with code 4.
+
+## Development
+
+```bash
+python -m pytest     # Runs the test suite
+python -m ruff check src tests
+python -m ruff format --check src tests
+python -m mypy src
 ```
 
 ## Explore the example project
 
 See [`examples/invoice_processing`](../examples/invoice_processing/) for
 a complete tool registry and workflow (including a deliberately invalid
-variant) that the compiler will validate once implemented.
+variant with documented expected diagnostics).
 
 ## Documentation
 

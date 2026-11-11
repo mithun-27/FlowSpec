@@ -1,8 +1,9 @@
 # Compiler Pipeline
 
-> **Design document — implementation pending.** This document describes
-> the planned compilation passes of FlowSpec. See [PROGRESS.md](PROGRESS.md)
-> for what is implemented today.
+> **Implemented for the v0.1.0 compiler foundation** (P9 dataflow and
+> P11 effect analysis are planned for v0.2.0). This document describes
+> the compilation passes of FlowSpec. See [PROGRESS.md](PROGRESS.md)
+> for the live status.
 
 ## Overview
 

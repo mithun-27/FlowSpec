@@ -1,8 +1,9 @@
 # Architecture
 
-> **Design document — implementation pending.** This document describes
-> the planned architecture of FlowSpec v0.1.0 and later. See
-> [PROGRESS.md](PROGRESS.md) for what is implemented today.
+> **Design document — the core described here is implemented for the
+> v0.1.0 compiler foundation; integrations and the execution runtime
+> are still planned.** See [PROGRESS.md](PROGRESS.md) for the live
+> status.
 
 ## Core philosophy
 

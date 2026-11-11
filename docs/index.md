@@ -7,15 +7,18 @@ compiler for AI agent tool workflows.**
 
 ## Current status
 
-**FlowSpec is in its scaffolding stage.** The repository currently
-contains the complete project structure, packaging and CI configuration,
-design documentation, and an honest placeholder skeleton for every
-planned module. **The compiler itself is not implemented yet.**
+**The v0.1.0 compiler foundation is implemented and green.** The full
+pipeline — parsing, AST construction, name resolution, semantic
+analysis, type inference and checking, dependency graphs, cycle
+detection, topological scheduling, constraint analysis, and versioned
+IR generation — works today, with a CLI (`flowspec init`, `inspect`,
+`parse`, `compile`, `explain`, `export`) and a public Python API.
 
-- What actually works today: package installation, `flowspec version`,
-  and the test/lint toolchain.
-- What does not: every compiler feature — parsing, type checking,
-  dependency analysis, diagnostics, and IR generation.
+- What works today: the compiler core, the CLI, deterministic JSON IR
+  export, and the test/lint toolchain.
+- What does not yet: dataflow and effect analysis (v0.2.0), all
+  integrations (v0.3.0+), graph rendering (v0.4.0), and the execution
+  runtime.
 - See [PROGRESS.md](PROGRESS.md) for the live implementation checklist.
 
 ## Documentation map
@@ -23,20 +26,20 @@ planned module. **The compiler itself is not implemented yet.**
 | Document | Contents |
 | -------- | -------- |
 | [PROGRESS.md](PROGRESS.md) | Implementation checklist — what is real vs. planned |
-| [getting_started.md](getting_started.md) | Installation and (future) first workflow |
+| [getting_started.md](getting_started.md) | Installation and compiling your first workflow |
 | [architecture.md](architecture.md) | Product and system architecture |
 | [compiler_pipeline.md](compiler_pipeline.md) | The P0–P12 compilation passes |
 | [workflow_language.md](workflow_language.md) | YAML/JSON workflow and tool schemas |
 | [type_system.md](type_system.md) | Types, nominal typing, compatibility rules |
 | [error_codes.md](error_codes.md) | Diagnostic codes E001–E701 |
 | [integrations.md](integrations.md) | MCP, OpenAPI, Python tools, agent frameworks |
-| [api_reference.md](api_reference.md) | Planned public Python API |
+| [api_reference.md](api_reference.md) | The public Python API |
 | [contributing.md](contributing.md) | How to contribute |
 
-All documents in this directory are **design documents** describing the
-planned behavior of FlowSpec v0.1.0 and beyond. They are the contract the
-implementation is being built against, not a description of shipped
-features — each document states clearly what is implemented today.
+The documents in this directory describe FlowSpec v0.1.0 and beyond.
+The v0.1.0 compiler foundation described here is implemented; later
+milestones remain design documents. Each document states clearly what
+is implemented today.
 
 ## Example projects
 
