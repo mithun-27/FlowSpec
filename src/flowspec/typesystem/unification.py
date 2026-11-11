@@ -1,21 +1,56 @@
 """Deterministic type unification.
 
-Determines whether two types can satisfy the same type constraint. The
-initial version will support exact type equality, nominal type checking,
-primitive widening (``integer`` → ``float``), generic type unification,
-optional type handling, union types, and object compatibility.
+Determines whether two types can satisfy the same constraint, and if so,
+the more general type they agree on. Unification is implemented as
+bidirectional assignability through the central
+:class:`~flowspec.typesystem.type_checker.TypeChecker` — v0.1.0 has no
+type variables, so unification reduces to finding the least general type
+both sides accept. An LLM is never used for type checking.
 
-Unification must stay deterministic — an LLM is never used for type
-checking.
-
-Status: planned for v0.1.0; not implemented yet. See ``docs/PROGRESS.md``.
+Status: implemented for the v0.1.0 compiler foundation.
 """
 
-from typing import NoReturn
+from __future__ import annotations
 
-__all__ = ["unify"]
+from dataclasses import dataclass
+
+from flowspec.config import CompilerConfig
+from flowspec.typesystem.type_checker import TypeChecker
+from flowspec.typesystem.types import FLOAT, INTEGER, Type
+
+__all__ = ["UnificationResult", "unify"]
 
 
-def unify(left: object, right: object) -> NoReturn:
-    """Attempt to unify two types. Not implemented yet."""
-    raise NotImplementedError("Type unification is planned for v0.1.0; see docs/PROGRESS.md")
+@dataclass(frozen=True)
+class UnificationResult:
+    """The outcome of a unification attempt."""
+
+    unified: bool
+    type: Type | None = None
+
+
+def unify(left: Type, right: Type, *, config: CompilerConfig | None = None) -> UnificationResult:
+    """Can ``left`` and ``right`` satisfy the same constraint?
+
+    On success, ``type`` is the more general of the two types (the target
+    of the successful assignment direction). Integer and float unify to
+    float.
+    """
+    if left == right:
+        return UnificationResult(True, left)
+
+    checker = TypeChecker(config)
+    left_to_right = checker.check_assignment(left, right)
+    if left_to_right.compatible:
+        return UnificationResult(True, right)
+
+    right_to_left = checker.check_assignment(right, left)
+    if right_to_left.compatible:
+        return UnificationResult(True, left)
+
+    # integer and float unify to float even though only one direction is
+    # directly assignable when parameters differ.
+    if {left, right} == {INTEGER, FLOAT}:
+        return UnificationResult(True, FLOAT)
+
+    return UnificationResult(False)
