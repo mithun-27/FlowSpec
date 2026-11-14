@@ -14,4 +14,9 @@ Status: ``static`` and ``constraints`` are implemented for the v0.1.0
 compiler foundation; ``dataflow`` and ``effects`` are planned for
 v0.2.0, ``permissions`` for v0.2.0, and ``suggestions`` for v0.4.0.
 See ``docs/PROGRESS.md``.
+
+Analyzers are read-only: they take the workflow AST plus the tool
+registry and return a diagnostic collection. They never rewrite the AST,
+never execute a tool, and never touch the terminal, so the same input
+always yields the same diagnostics.
 """
