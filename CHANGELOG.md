@@ -54,3 +54,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   3.11–3.13, and a tag-triggered build workflow that produces distributions.
 - Community files: Apache-2.0 `LICENSE`, `CONTRIBUTING.md`, `SECURITY.md`,
   issue templates, and a pull request template.
+- Documentation: updated status banners across all docs to reflect v0.1.0
+  implementation reality; error code registry now marks implemented vs.
+  reserved codes; example README shows real compiler output.
