@@ -62,6 +62,7 @@ The Python API works the same way:
 
 ```python
 from flowspec import Compiler
+from flowspec.visualization.exporters import export_ir
 
 compiler = Compiler()
 result = compiler.compile(
@@ -71,6 +72,9 @@ result = compiler.compile(
 
 print(result.success)          # True
 print(result.execution_order)  # ('customer', 'invoice', 'payment', 'send')
+
+# Export deterministic IR JSON
+print(export_ir(result))
 ```
 
 Commands not implemented yet (`test`, `graph`, `validate-mcp`,
