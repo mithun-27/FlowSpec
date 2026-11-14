@@ -63,6 +63,10 @@ and required flags.
 All rules live in a **single central compatibility engine** — comparison
 logic is never spread across compiler modules.
 
+Rule of thumb: `Optional[T]` is a supertype of both `T` and `null`,
+never a subtype. A possibly-null value must be narrowed (or defaulted)
+before it can flow into a parameter that expects a plain `T`.
+
 ## Inference and unification
 
 - **Inference** derives expression types from workflow input declarations,
