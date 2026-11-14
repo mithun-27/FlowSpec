@@ -428,6 +428,9 @@ and exit with code 4 today.
 FlowSpec is open source. Help make AI agent workflows more reliable. See
 [CONTRIBUTING.md](CONTRIBUTING.md) for contributing guidelines.
 
+Good first issues: improve diagnostic messages, add test coverage for edge
+cases, or extend the example project.
+
 ---
 
 ## License
