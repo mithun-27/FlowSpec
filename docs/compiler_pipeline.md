@@ -38,6 +38,20 @@ diagnostics and a non-executable analysis report.
 - Diagnostics aggregate across passes before being reported; a pass that
   fails fast still contributes the diagnostics gathered so far.
 
+## Early exits
+
+Not every pass runs on every input:
+
+- A structural failure in **P0–P2** (unreadable source, malformed
+  document, invalid workflow shape) ends the run immediately, with the
+  diagnostics found so far and no later passes attempted.
+- **P10** constraint analysis runs only when every earlier pass was
+  clean, so a constraint violation is never reported as duplicate noise
+  for a problem that already has a precise code.
+- **P12** emits IR only when there are zero error diagnostics and a
+  valid execution order. Invalid workflows never produce executable IR,
+  even partially.
+
 ## Result
 
 | Outcome | Produced |
