@@ -37,6 +37,20 @@ never reused, and never renamed.
 
 Codes marked ⬜ are reserved; the current v0.1.0 compiler does not emit them.
 
+The numeric ranges encode the category, so a code's prefix is enough to
+know which pass produced it:
+
+| Range | Category | Pass |
+| ----- | -------- | ---- |
+| E0xx | Syntax, structure | P0–P2 |
+| E1xx | Dependency | P7 |
+| E2xx | Type | P5–P6 |
+| E3xx | Graph | P8 |
+| E4xx | Tool | P3 |
+| E5xx | Security | P11 |
+| E6xx | Constraint | P10 |
+| E7xx | IR | P12 |
+
 ## Diagnostic shape
 
 Every diagnostic carries:
