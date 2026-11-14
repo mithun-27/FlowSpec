@@ -34,7 +34,7 @@ maps that to exit code 2.
 
 ## Core objects
 
-All importable from the package root:
+All importable from the package root (`from flowspec import ...`):
 
 | Object | Role |
 | ------ | ---- |
@@ -50,6 +50,9 @@ All importable from the package root:
 | `TypeChecker` | Type compatibility checking |
 | `WorkflowGraph` | Dependency graph with adjacency and reverse adjacency |
 | `Diagnostic` | Structured error information (code, severity, location, suggestions) |
+
+Version note: `flowspec.__version__` is `"0.1.0.dev0"`; the IR carries its own
+`ir_version` field (`"1.0"`) for forward compatibility.
 
 `CompilationResult` exposes `workflow_name`, `diagnostics`, `ir`,
 `graph`, `stages`, and the `success`, `error_count`, `warning_count`,
