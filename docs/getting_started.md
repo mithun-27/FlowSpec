@@ -6,8 +6,8 @@
 
 ## Installation
 
-FlowSpec is not yet published on PyPI. Install from source (Windows,
-Linux, and macOS):
+FlowSpec requires **Python 3.11 or later** (tested on 3.11–3.13). It is
+not yet published on PyPI; install from source (Windows, Linux, macOS):
 
 ```bash
 git clone https://github.com/mithun-27/FlowSpec.git
