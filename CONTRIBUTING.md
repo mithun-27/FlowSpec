@@ -31,6 +31,12 @@ python -m ruff check src tests
 flowspec version
 ```
 
+Quick tips:
+
+- Run a specific test module: `python -m pytest tests/unit/test_pipeline.py -v`
+- Run property tests with example output: `python -m pytest tests/property -v --hypothesis-show-statistics`
+- Compile the example: `flowspec compile examples/invoice_processing/workflow.yaml`
+
 ## Common tasks
 
 A `Makefile` is provided for Unix-like systems. On Windows, run the underlying
