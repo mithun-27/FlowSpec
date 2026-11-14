@@ -11,6 +11,16 @@ Get Customer → Create Invoice → Send Invoice → Update Payment Status
 > implemented, so every file below compiles (or fails) for real. Run the
 > commands from this directory. See [docs/PROGRESS.md](../../docs/PROGRESS.md).
 
+## Running from the repository root
+
+The commands below assume you are inside this directory, because the
+compiler looks for a sibling `tools.yaml` next to the workflow. From the
+repository root, point at the registry explicitly:
+
+```bash
+flowspec compile examples/invoice_processing/workflow.yaml --tools examples/invoice_processing/tools.yaml
+```
+
 ## Files
 
 | File | Contents |
