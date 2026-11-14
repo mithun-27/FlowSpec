@@ -117,6 +117,10 @@ calls arrive in later releases.
 
 ## Project configuration (`flowspec.yaml`)
 
+The project configuration file is looked up beside the workflow source
+file (sibling `flowspec.yaml`). Missing files fall back to defaults;
+invalid YAML is a configuration error (CLI exit code 2).
+
 ```yaml
 version: "1.0"
 
