@@ -128,5 +128,5 @@ and modules report themselves honestly and exit with code 4.
 | Unit tests | ✅ | 281 tests across every implemented module |
 | Integration tests | ✅ | 40 CLI tests: commands, exit codes, project setup |
 | Negative-path tests | ✅ | Every pass has failure-mode tests (E001-E402, E601) |
-| Property tests (Hypothesis) | ✅ | Valid-workflow compilation; DAG ordering/staging |
+| Property tests (Hypothesis) | ✅ | Valid-workflow compilation; DAG ordering/staging (150 examples each) |
 | Benchmarks | ⬜ | |
