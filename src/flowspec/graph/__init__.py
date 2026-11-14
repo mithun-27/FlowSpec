@@ -12,4 +12,8 @@ Submodules:
 
 Status: implemented for the v0.1.0 compiler foundation; see
 ``docs/PROGRESS.md``.
+
+Ordering is deterministic: whenever several steps are ready at once, the
+ready set is processed in sorted step-id order. The same graph therefore
+always produces the same topological order and the same parallel stages.
 """
