@@ -44,5 +44,5 @@ is implemented today.
 ## Example projects
 
 See [`examples/invoice_processing`](../examples/invoice_processing/) in
-the repository root for a complete sample project (valid and invalid
-workflow definitions) that the compiler will validate once implemented.
+the repository root for a complete sample project with valid and invalid
+workflow definitions — the v0.1.0 compiler validates both today.
