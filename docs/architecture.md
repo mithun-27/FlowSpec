@@ -91,6 +91,12 @@ src/flowspec/
 └── visualization/ # Graph rendering, exporters
 ```
 
+The supported public API is re-exported from the top-level `flowspec`
+package (`Compiler`, `CompilerConfig`, `CompilationResult`,
+`IntermediateRepresentation`, `WorkflowNode`, `ToolRegistry`, `Type`, and
+others). Imports from internal submodules are implementation details;
+see [api_reference.md](api_reference.md).
+
 ## Architectural invariants
 
 1. **Compilation never executes tools.** Only explicit runtime invocation
