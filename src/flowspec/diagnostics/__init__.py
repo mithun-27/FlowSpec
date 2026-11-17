@@ -9,7 +9,10 @@ Submodules:
 - ``formatter`` — human-readable rendering of diagnostics.
 
 The core compiler must never depend on Rich; terminal formatting lives in
-the CLI layer only.
+the CLI layer only. Compiler passes return a ``DiagnosticCollection`` as
+data — they never print or decide presentation. The ``formatter`` module
+is the single place that renders diagnostics for humans, and it is called
+by the CLI, not by the pipeline.
 
 Status: implemented for the v0.1.0 compiler foundation; see
 ``docs/PROGRESS.md``.
