@@ -4,6 +4,12 @@
 > describes the planned external integrations of FlowSpec. None of them
 > exist yet. See [PROGRESS.md](PROGRESS.md) for what is implemented today.
 
+Until auto-import lands, tools are declared in a hand-written YAML or JSON
+registry file and passed to the compiler. See
+[`examples/invoice_processing/tools.yaml`](../examples/invoice_processing/tools.yaml)
+for a working example and [workflow_language.md](workflow_language.md) for
+the schema format.
+
 ## Model Context Protocol (MCP) — v0.3.0
 
 ```text
