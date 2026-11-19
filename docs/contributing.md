@@ -12,6 +12,8 @@
   the feature.
 - Every compiler change ships with tests, including negative cases.
 - CI must pass: Ruff lint, Ruff format check, pytest, mypy.
+- To run just one test file while iterating:
+  `python -m pytest tests/unit/test_package.py -q`.
 - Security invariants are binding: compilation never executes tools, and
   workflow files are untrusted input. See
   [`SECURITY.md`](../SECURITY.md).
