@@ -12,6 +12,13 @@ Mapping to diagnostic codes:
 - :class:`TypeParseError` → E205 (malformed type expression)
 - :class:`ConfigurationError` → exit code 2 (project/config error)
 
+The pipeline catches ``SourceError`` subclasses at the loader boundary and
+turns them into structured diagnostics, so callers of ``Compiler`` do not
+need to catch them for workflow mistakes. ``ConfigurationError`` means the
+project setup (such as a missing source file) is wrong; ``InternalError``
+means a compiler invariant was violated (CLI exit code 4), not that the
+workflow is invalid.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
