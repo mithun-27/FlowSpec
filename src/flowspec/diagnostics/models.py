@@ -128,6 +128,14 @@ class DiagnosticCollection:
     def warning_count(self) -> int:
         return sum(1 for d in self.diagnostics if d.severity == Severity.WARNING)
 
+    def for_code(self, code: str) -> tuple[Diagnostic, ...]:
+        """All diagnostics with exactly ``code``, in insertion order."""
+        return tuple(diagnostic for diagnostic in self.diagnostics if diagnostic.code == code)
+
+    def for_step(self, step_id: str) -> tuple[Diagnostic, ...]:
+        """All diagnostics attached to ``step_id``, in insertion order."""
+        return tuple(diagnostic for diagnostic in self.diagnostics if diagnostic.step == step_id)
+
     def sorted(self) -> list[Diagnostic]:
         """The diagnostics in deterministic order."""
         return sorted(self.diagnostics, key=lambda d: d.sort_key)

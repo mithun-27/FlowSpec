@@ -62,6 +62,38 @@ def test_collection_dedupes_and_counts() -> None:
     assert collection.warning_count == 1
 
 
+def test_collection_query_helpers() -> None:
+    a = Diagnostic(
+        code="E201",
+        severity=Severity.ERROR,
+        message="type mismatch",
+        workflow="w",
+        step="invoice",
+    )
+    b = Diagnostic(
+        code="E201",
+        severity=Severity.ERROR,
+        message="another mismatch",
+        workflow="w",
+        step="payment",
+    )
+    c = Diagnostic(
+        code="E304",
+        severity=Severity.ERROR,
+        message="duplicate step",
+        workflow="w",
+        step="invoice",
+    )
+    collection = DiagnosticCollection()
+    collection.extend([a, b, c])
+
+    assert collection.for_code("E201") == (a, b)
+    assert collection.for_step("invoice") == (a, c)
+    # Queries are exact and return an empty tuple rather than raising.
+    assert collection.for_code("E999") == ()
+    assert collection.for_step("ghost") == ()
+
+
 def test_sorting_is_deterministic() -> None:
     a = Diagnostic(
         code="E202",
