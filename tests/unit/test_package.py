@@ -50,6 +50,7 @@ IMPLEMENTED = [
     "flowspec.graph.cycle_detection",
     "flowspec.graph.topological_sort",
     "flowspec.graph.scheduler",
+    "flowspec.graph.reachability",
     "flowspec.analysis.static",
     "flowspec.analysis.constraints",
     "flowspec.compiler.compiler",
@@ -62,7 +63,6 @@ IMPLEMENTED = [
 
 STUBS = [
     "flowspec.registry.schema_normalizer",
-    "flowspec.graph.reachability",
     "flowspec.analysis.dataflow",
     "flowspec.analysis.effects",
     "flowspec.analysis.permissions",

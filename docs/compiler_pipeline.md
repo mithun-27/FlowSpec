@@ -52,6 +52,14 @@ Not every pass runs on every input:
   valid execution order. Invalid workflows never produce executable IR,
   even partially.
 
+## Reachability (E303)
+
+After graph analysis, a step that cannot reach any workflow output or
+required side effect is reported as an unreachable step. Steps whose only
+effect is a pure `read` do not stay alive by themselves; writes and
+external writes do. This pass runs only on otherwise-clean workflows, so
+dead-step reports never pile onto workflows that already have errors.
+
 ## Result
 
 | Outcome | Produced |

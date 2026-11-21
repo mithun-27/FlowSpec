@@ -12,7 +12,8 @@ aggregating diagnostics across passes into one
   central checker).
 - **P7-P8** build the dependency graph, diagnose cycles (when cycle
   detection is enabled), and compute the deterministic topological order
-  and parallel execution stages.
+  and parallel execution stages. Reachability (E303) then reports dead
+  steps, but only when the workflow is otherwise clean.
 - **P10** run the constraint engine — only when every earlier pass was
   clean, so constraint violations are never duplicate noise for
   problems already reported with precise codes.
@@ -42,6 +43,7 @@ from flowspec.diagnostics.models import Diagnostic, DiagnosticCollection, Severi
 from flowspec.exceptions import SourceError
 from flowspec.graph.cycle_detection import cycle_diagnostics
 from flowspec.graph.graph import WorkflowGraph
+from flowspec.graph.reachability import analyze_reachability
 from flowspec.graph.scheduler import ExecutionStage, build_execution_stages
 from flowspec.graph.topological_sort import topological_sort
 from flowspec.parser.ast_builder import build_workflow_ast
@@ -174,6 +176,11 @@ class CompilationPipeline:
             )
         if stages is None:
             stages = []
+
+        # Reachability (E303) — only over an otherwise-clean workflow, so
+        # dead-step reports never pile onto workflows already failing.
+        if not sink.has_errors:
+            sink.extend(analyze_reachability(graph, workflow, registry))
 
         # P10: constraint analysis — the final gate, only over clean state.
         if not sink.has_errors:
