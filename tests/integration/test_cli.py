@@ -80,6 +80,20 @@ def test_version_command() -> None:
     assert result.output == f"FlowSpec {flowspec.__version__}\n"
 
 
+def test_version_json_command() -> None:
+    result = runner.invoke(app, ["version", "--json"])
+    assert result.exit_code == 0
+    payload = json.loads(result.output)
+    assert payload == {"ir_version": "1.0", "version": flowspec.__version__}
+    assert result.output == json.dumps(payload, sort_keys=True) + "\n"
+
+
+def test_version_json_output_is_deterministic() -> None:
+    first = runner.invoke(app, ["version", "--json"])
+    again = runner.invoke(app, ["version", "--json"])
+    assert first.output == again.output
+
+
 # --- compile --------------------------------------------------------
 
 
