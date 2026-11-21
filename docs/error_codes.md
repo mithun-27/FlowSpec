@@ -25,7 +25,7 @@ never reused, and never renamed.
 | E205 | Type | Invalid generic type | ✅ |
 | E301 | Graph | Circular dependency | ✅ |
 | E302 | Graph | Invalid execution order | ✅ |
-| E303 | Graph | Unreachable step | ⬜ (v0.2.0) |
+| E303 | Graph | Unreachable step | ✅ |
 | E304 | Graph | Duplicate step ID | ✅ |
 | E401 | Tool | Unknown tool | ✅ |
 | E402 | Tool | Invalid tool argument | ✅ |

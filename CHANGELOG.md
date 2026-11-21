@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     `Diagnostic`).
   - Structured diagnostics (E001–E601) with locations, expected/received
     values, and suggestions; deterministic JSON exporters.
+- Reachability analysis (E303): dead steps that cannot reach a workflow
+  output or a required side effect are reported and block IR emission.
 - Test suite: 323 tests in total — 281 unit tests, 40 CLI integration
   tests, and 2 Hypothesis property tests (generated valid workflows compile
   with order, staging, and determinism guarantees; random DAGs sort and

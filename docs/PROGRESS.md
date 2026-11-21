@@ -78,7 +78,7 @@ and modules report themselves honestly and exit with code 4.
 | Dependency graph | `graph/graph.py` | ✅ | |
 | Cycle detection | `graph/cycle_detection.py` | ✅ | |
 | Topological sorting | `graph/topological_sort.py` | ✅ | |
-| Reachability analysis | `graph/reachability.py` | ⬜ | v0.2.0 |
+| Reachability analysis | `graph/reachability.py` | ✅ | E303 dead steps; output + side-effect roots |
 | Static analyzers | `analysis/` | 🟡 | `static.py` + `constraints.py` done; dataflow/effects v0.2.0 |
 | Constraint engine | `analysis/constraints.py` | ✅ | 7 rule kinds, one diagnostic kind per failure |
 | Effect analysis | `analysis/effects.py` | ⬜ | v0.2.0 |

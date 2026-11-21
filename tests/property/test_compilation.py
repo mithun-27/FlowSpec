@@ -4,7 +4,8 @@ Two properties:
 
 1. Every workflow the generator can build from the fixed test registry —
    every required tool argument bound to a type-compatible, already
-   available source — compiles cleanly, and its execution plan respects
+   available source with every terminal step observed by an output —
+   compiles cleanly, and its execution plan respects
    the generated dependencies: the topological order puts producers
    before consumers, the execution stages partition all steps, and every
    dependency lands in a strictly earlier stage. Compilation is also
@@ -70,6 +71,8 @@ def valid_workflows(draw: st.DrawFn) -> tuple[str, dict[str, set[str]]]:
         "float": ["$input.amount"],
     }
     dependencies: dict[str, set[str]] = {}
+    consumed: set[str] = set()
+    step_sources: dict[str, list[str]] = {}
     lines = [
         "version: '1.0'",
         "",
@@ -95,6 +98,7 @@ def valid_workflows(draw: st.DrawFn) -> tuple[str, dict[str, set[str]]]:
         tool = draw(st.sampled_from(candidates))
         step_id = f"s{index}"
         dependencies.setdefault(step_id, set())
+        step_sources[step_id] = []
         lines.append(f"    - id: {step_id}")
         lines.append(f"      tool: {tool}")
         lines.append("      inputs:")
@@ -103,6 +107,7 @@ def valid_workflows(draw: st.DrawFn) -> tuple[str, dict[str, set[str]]]:
             producer = _producer_of(source)
             if producer is not None:
                 dependencies[step_id].add(producer)
+                consumed.add(producer)
             lines.append(f"        {argument}: {source}")
         for argument, type_name in _OPTIONAL_INPUTS.get(tool, {}).items():
             if type_name in pool and draw(st.booleans()):
@@ -110,13 +115,22 @@ def valid_workflows(draw: st.DrawFn) -> tuple[str, dict[str, set[str]]]:
                 producer = _producer_of(source)
                 if producer is not None:
                     dependencies[step_id].add(producer)
+                    consumed.add(producer)
                 lines.append(f"        {argument}: {source}")
         for output, out_type in _TOOL_OUTPUTS[tool].items():
-            pool.setdefault(out_type, []).append(f"${step_id}.{output}")
+            source = f"${step_id}.{output}"
+            pool.setdefault(out_type, []).append(source)
+            step_sources[step_id].append(source)
         lines.append("")
 
     sources = [source for values in pool.values() for source in values]
-    chosen = draw(st.sets(st.integers(min_value=0, max_value=len(sources) - 1)))
+    # Every terminal step must be observable through an output; otherwise
+    # reachability (E303) would correctly reject it as a dead step.
+    required = set()
+    for step_id, outputs in step_sources.items():
+        if step_id not in consumed and outputs:
+            required.add(sources.index(outputs[0]))
+    chosen = draw(st.sets(st.integers(min_value=0, max_value=len(sources) - 1))) | required
     if chosen:
         lines.append("  outputs:")
         for position, source_index in enumerate(sorted(chosen)):
