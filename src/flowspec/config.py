@@ -5,6 +5,10 @@
 permission validation, IR generation, and parser safety limits. Unknown
 configuration keys are rejected rather than silently ignored.
 
+Defaults are conservative: strict typing, cycle detection, permission
+validation, and IR generation are all on. Callers opt into permissive
+behavior explicitly rather than getting it by accident.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
