@@ -27,6 +27,7 @@ honestly and exit with code 4. See ``docs/PROGRESS.md``.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Annotated, NoReturn
 
@@ -36,6 +37,7 @@ from typer.exceptions import TyperException
 from flowspec import __version__
 from flowspec.ast.expressions import describe_expression
 from flowspec.compiler.compiler import Compiler
+from flowspec.compiler.ir import IR_VERSION
 from flowspec.compiler.pipeline import PIPELINE_PASSES
 from flowspec.compiler.result import CompilationResult
 from flowspec.config import CompilerConfig
@@ -267,8 +269,16 @@ def _output_flags(parameter: ParameterSpec) -> str:
 
 
 @app.command()
-def version() -> None:
+def version(
+    json_output: Annotated[
+        bool,
+        typer.Option("--json", help="Print version information as deterministic JSON."),
+    ] = False,
+) -> None:
     """Print the FlowSpec version."""
+    if json_output:
+        typer.echo(json.dumps({"version": __version__, "ir_version": IR_VERSION}, sort_keys=True))
+        return
     typer.echo(f"FlowSpec {__version__}")
 
 
