@@ -33,9 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     `Diagnostic`).
   - Structured diagnostics (E001–E601) with locations, expected/received
     values, and suggestions; deterministic JSON exporters.
-- Test suite: 281 unit tests, 40 CLI integration tests, and Hypothesis
-  property tests (generated valid workflows compile with order, staging,
-  and determinism guarantees; random DAGs sort and stage correctly).
+- Test suite: 323 tests in total — 281 unit tests, 40 CLI integration
+  tests, and 2 Hypothesis property tests (generated valid workflows compile
+  with order, staging, and determinism guarantees; random DAGs sort and
+  stage correctly).
 - Project scaffolding: `src/` package layout, packaging via Hatchling, and Ruff,
   pytest, mypy, and coverage configuration.
 - Honest placeholder skeleton for every module not yet implemented. Each
