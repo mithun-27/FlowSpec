@@ -8,6 +8,9 @@ JSON documents do not carry per-value source locations in v0.1.0;
 diagnostics fall back to workflow/step context. YAML is the primary
 format and is fully located.
 
+Duplicate object keys are rejected through the decoder's object hook,
+matching the YAML parser's behavior so neither format silently drops data.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
