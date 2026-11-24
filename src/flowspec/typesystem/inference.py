@@ -6,6 +6,9 @@ references — deterministically, without any LLM involvement. Also
 enforces the unknown-nominal-type policy (E203) on workflow input
 declarations under strict typing.
 
+Inference is purely local and deterministic: it consults only declarations
+and tool contracts, never external state or a model.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
