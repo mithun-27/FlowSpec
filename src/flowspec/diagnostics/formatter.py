@@ -4,6 +4,9 @@ Renders structured diagnostics as plain text for terminal output and as
 dictionaries for JSON export. The core compiler never depends on Rich;
 this module produces plain strings, and the CLI layer may colorize them.
 
+Output is stable and sortable: diagnostics keep their deterministic order,
+and ``format_summary`` reports error and warning counts without escapes.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
