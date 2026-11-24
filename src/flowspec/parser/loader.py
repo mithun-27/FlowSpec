@@ -5,6 +5,10 @@ Reads a workflow or tool file from disk and parses it into a located
 ``.json`` files and the safe YAML parser for everything else. Parser
 safety limits come from the compiler configuration.
 
+Only the file extension selects the parser: ``.json`` uses the JSON parser
+and every other suffix uses safe YAML. Content is never sniffed, so a
+mislabeled file is parsed strictly as its extension implies.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
