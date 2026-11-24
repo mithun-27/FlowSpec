@@ -7,6 +7,10 @@
 - Records source locations for every mapping and sequence so later passes
   can attach precise positions to diagnostics.
 
+Size and depth limits are caller-configurable and default to
+``DEFAULT_MAX_SIZE`` and ``DEFAULT_MAX_DEPTH``; exceeding either is a
+syntax error, never a silent truncation.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
