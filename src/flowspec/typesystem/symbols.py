@@ -5,6 +5,9 @@ outputs, and the universe of known nominal type names. Used to resolve
 every expression; declaration order in the source does not matter —
 forward references are permitted while the dependency graph stays valid.
 
+Each symbol is immutable and keyed by name; the table is built once before
+expression resolution so lookups are deterministic and order-independent.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
