@@ -20,6 +20,9 @@ after every earlier pass is clean.
 Effect, permission, reachability, and dataflow analyzers arrive in
 v0.2.0 and will plug into this orchestrator.
 
+The analyzer aggregates diagnostics without changing the workflow; it is a
+reporting pass, not a transformation, and never interrupts compilation.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
