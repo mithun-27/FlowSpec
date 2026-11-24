@@ -4,6 +4,9 @@ Compiler passes walk the AST through :func:`walk` or subclass
 :class:`ASTVisitor` instead of embedding traversal logic in node
 definitions.
 
+``walk`` yields nodes in source order; ``ASTVisitor`` dispatches by node
+type, and both handle the expression and workflow trees uniformly.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
