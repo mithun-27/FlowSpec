@@ -9,6 +9,9 @@ Expression syntax (v0.1.0): ``$input.name`` workflow input references,
 ``$``-form is a syntax error (E001); nested property access is not
 supported yet.
 
+AST nodes are immutable records that retain the parser's source locations,
+so every later pass can point diagnostics at the originating text.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
