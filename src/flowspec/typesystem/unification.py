@@ -7,6 +7,9 @@ bidirectional assignability through the central
 type variables, so unification reduces to finding the least general type
 both sides accept. An LLM is never used for type checking.
 
+When unification fails the result carries no type, never a guessed or
+fallback type — callers report the incompatibility instead.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
