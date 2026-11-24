@@ -5,6 +5,9 @@ steps, and outputs. ``ToolCallNode`` holds a step's tool reference and its
 input expressions. ``OutputNode`` binds a workflow output name to an
 expression.
 
+Steps preserve declaration order, while inputs and outputs are keyed by
+name; the AST is format-independent and holds no YAML/JSON specifics.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
