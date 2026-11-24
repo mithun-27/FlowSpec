@@ -14,6 +14,9 @@ Limitation: JSON documents carry no per-value positions in v0.1.0, so
 ``locate`` returns ``None`` for them and diagnostics fall back to
 workflow/step context. YAML is the primary format and is fully located.
 
+Locations are keyed by container identity, so copies of the parsed tree do
+not retain positions — always locate against the original document.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
