@@ -18,6 +18,10 @@ violation, and ``TypeCompatibility`` deliberately skips that case —
 each failure is reported through exactly one constraint kind, never
 twice.
 
+The pipeline runs this engine only on otherwise-clean workflows, so a
+constraint violation never duplicates a more precise error from an earlier
+pass.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
