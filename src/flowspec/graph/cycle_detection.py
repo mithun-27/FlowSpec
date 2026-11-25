@@ -10,6 +10,9 @@ limit.
 - A step consuming its own output is a cycle of one: E104
   (self-dependency).
 
+Detection is read-only: it returns ``Cycle`` records for the diagnostic
+layer and never rewrites or removes graph edges.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
