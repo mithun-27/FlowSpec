@@ -9,6 +9,10 @@ Only JSON is exported in v0.1.0. Other machine-readable formats (and
 graph rendering) are planned for later releases; see
 ``docs/PROGRESS.md``.
 
+``export_ir`` refuses to render a failed compilation, while
+``export_result`` can export its diagnostics. Neither writes files — the
+CLI decides where output goes.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
