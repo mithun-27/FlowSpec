@@ -9,6 +9,9 @@ Cyclic graphs have no schedule: ``None`` is returned rather than a
 partial plan. Stages never violate dependency constraints — a step only
 runs after every step it consumes has completed.
 
+Stages are a plan, not an executor: this module never invokes tools or
+changes the graph. An execution runtime, when added, consumes the plan.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
