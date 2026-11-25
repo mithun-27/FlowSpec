@@ -8,6 +8,9 @@ Cyclic graphs have no valid order. Cycles are diagnosed by
 :mod:`flowspec.graph.cycle_detection` (E301/E104); this sort returns
 ``None`` rather than a partial or invented order — no fake results.
 
+This module computes a linear order only. It never groups steps into
+parallel stages (see :mod:`flowspec.graph.scheduler`) and never runs them.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
