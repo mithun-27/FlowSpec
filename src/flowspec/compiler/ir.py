@@ -10,6 +10,10 @@ derived only from the source (declaration order) or sorted explicitly.
 Identical inputs and configuration always produce identical JSON.
 Invalid workflows are never exported as executable IR.
 
+``IR_VERSION`` is the schema version and changes only on breaking IR
+changes. The recorded ``compiler_version`` is informational metadata; it
+never affects compatibility decisions or diagnostic codes.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
