@@ -35,7 +35,7 @@ specification and must hold at every stage of development:
 
 ## Scope
 
-FlowSpec is currently in its scaffolding stage: the repository contains the
-project structure, design documentation, and placeholder modules, but no
-compiler logic yet. The invariants above are binding for all future
-implementation work; see `docs/PROGRESS.md` for what is currently implemented.
+The v0.1.0 compiler foundation is implemented: parsing, analysis, type
+checking, scheduling, IR generation, and the CLI all run for real. The
+invariants above are enforced by the implemented passes and remain binding
+for every future feature; see `docs/PROGRESS.md` for the current checklist.
