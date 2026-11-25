@@ -6,6 +6,9 @@ aggregated, deduplicated, deterministically ordered structured
 diagnostics. It never claims success for workflows that failed any
 mandatory pass — an invalid workflow always has ``ir is None``.
 
+A result is a frozen record: it reports the outcome and renders it on
+request, but it never starts execution or mutates the compiled artifacts.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
