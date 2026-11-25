@@ -6,6 +6,9 @@ structure diagnostics it can find — not just the first. Type expressions
 and reference syntax are checked by later passes; this module only checks
 shape.
 
+Effect names are part of that shape: values outside ``KNOWN_EFFECTS`` are
+reported as E002 here, never passed through to the type system.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
