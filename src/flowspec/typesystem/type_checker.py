@@ -28,6 +28,9 @@ Union  T                          Valid iff every member -> T
 Obj    Obj                        required properties present
 ===== ========================= ==============================
 
+The checker returns structured results only: it never prints, and it
+never depends on a formatter or a console. The CLI renders its outcomes.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
