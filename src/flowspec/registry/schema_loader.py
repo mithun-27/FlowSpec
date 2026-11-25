@@ -6,6 +6,10 @@ validation (E002) and parsing every type expression (E205). All failures
 are reported as structured diagnostics — the loader never guesses and
 never silently ignores a malformed contract.
 
+Both entry points share the same path: ``load_tool_schema`` reads a file
+into a ``Document``, and ``load_tool_document`` validates that document.
+Callers with an already-parsed document use the latter directly.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
