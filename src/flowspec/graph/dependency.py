@@ -6,6 +6,9 @@ construction. Only *resolved* references become edges — a reference whose
 step or output is unknown (already reported as E102/E103 by name
 resolution) never invents a graph edge.
 
+Each edge keeps the source location of the consuming argument, so later
+graph diagnostics point at the exact expression rather than the step.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
