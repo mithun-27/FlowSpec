@@ -6,6 +6,9 @@ mapping required fields, primitives, nested objects, and arrays, and
 reporting — never silently ignoring — unsupported schema constructs.
 
 Status: planned for v0.3.0; not implemented yet. See ``docs/PROGRESS.md``.
+
+Import loaders must not guess: unsupported constructs will be reported as
+diagnostics rather than silently dropped from the registry.
 """
 
 from typing import NoReturn
