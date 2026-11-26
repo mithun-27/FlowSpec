@@ -6,6 +6,9 @@ enforce credentials, access policies, and approvals; compilation is never
 treated as authorization.
 
 Status: planned; not implemented yet. See ``docs/PROGRESS.md``.
+
+The CLI never constructs a runtime; compiling a workflow and running one
+are deliberately separate operations.
 """
 
 __all__ = ["Runtime"]
