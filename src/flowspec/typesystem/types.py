@@ -10,7 +10,9 @@ Type forms (specification §6):
   ``Dict[K, V]``.
 - Structural object types with nested, required, and optional properties.
 
-Types are frozen and hashable; structural equality is exact.
+Types are frozen and hashable; structural equality is exact. Nominal
+identity is by declared name, not representation; assignability is decided
+by the central type checker, never by these records.
 
 Status: implemented for the v0.1.0 compiler foundation.
 """
