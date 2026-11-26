@@ -12,7 +12,8 @@ sitting next to the workflow file; pass ``tools_path`` to point
 elsewhere. Missing or unreadable files raise
 :class:`~flowspec.exceptions.ConfigurationError`.
 
-Compilation is deterministic and never executes a tool.
+Compilation is deterministic and never executes a tool. Each call builds a
+fresh pipeline from the stored config; results carry no cached state.
 
 Status: implemented for the v0.1.0 compiler foundation.
 """
