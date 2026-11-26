@@ -5,6 +5,9 @@ literal. Feeds missing-input diagnostics, type checking, and the
 explanation of parameter origins.
 
 Status: planned for v0.2.0; not implemented yet. See ``docs/PROGRESS.md``.
+
+Until then, name resolution and type inference handle references directly;
+no separate value-origin graph is built.
 """
 
 from typing import NoReturn
