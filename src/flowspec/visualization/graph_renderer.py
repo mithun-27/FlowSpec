@@ -4,6 +4,9 @@ Renders workflow dependency graphs for the ``flowspec graph`` command and
 the Playground, using Graphviz with the Graphviz ``viz`` extra.
 
 Status: planned for v0.4.0; not implemented yet. See ``docs/PROGRESS.md``.
+
+Until then ``render_graph`` raises ``NotImplementedError`` rather than
+emitting a partial graph; the CLI reports that honestly (exit code 4).
 """
 
 from typing import NoReturn
