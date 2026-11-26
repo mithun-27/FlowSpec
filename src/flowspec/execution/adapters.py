@@ -6,6 +6,9 @@ against declared output contracts at runtime (a future capability) and
 enforce security policies independently of the compiler.
 
 Status: planned; not implemented yet. See ``docs/PROGRESS.md``.
+
+Adapters are separate from the compiler: compilation never loads a backend,
+opens a connection, or checks credentials.
 """
 
 __all__ = ["ToolAdapter"]
