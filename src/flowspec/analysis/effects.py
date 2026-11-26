@@ -7,6 +7,9 @@ preserving effect information in the IR. Compilation is never treated as
 authorization (E502).
 
 Status: planned for v0.2.0; not implemented yet. See ``docs/PROGRESS.md``.
+
+E502 is reserved for unsafe side-effect configuration. Today effect names
+are validated as structure, but no effect policy is enforced.
 """
 
 __all__ = ["EffectAnalyzer"]
