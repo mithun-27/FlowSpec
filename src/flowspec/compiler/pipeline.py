@@ -27,6 +27,9 @@ executes a tool. Missing or unreadable source files raise
 :class:`~flowspec.exceptions.ConfigurationError` (CLI exit code 2);
 everything about the *workflow itself* is reported as diagnostics.
 
+The pipeline never writes files or mutates the parsed AST; callers decide
+how to render or export the returned result.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
