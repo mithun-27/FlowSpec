@@ -6,6 +6,9 @@ and respects approval requirements. Automatic retries and compensation
 logic are out of scope for the initial compiler.
 
 Status: planned; not implemented yet. See ``docs/PROGRESS.md``.
+
+No planner is wired into the v0.1.0 pipeline: the versioned IR is the final
+compile artifact, and planning belongs to a future runtime.
 """
 
 __all__ = ["ExecutionPlanner"]
