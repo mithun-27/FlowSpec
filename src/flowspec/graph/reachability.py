@@ -16,6 +16,9 @@ no required side effects — have no reachability requirement and are
 skipped. Results are deterministic: root and unreachable-step order
 follows the graph's declaration order.
 
+Analysis is read-only: it returns unreachable step ids for E303 diagnostics
+and leaves those steps in the compiled workflow.
+
 Status: implemented for the v0.1.0 compiler foundation; see
 ``docs/PROGRESS.md``.
 """
