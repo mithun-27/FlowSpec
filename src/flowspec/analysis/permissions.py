@@ -6,6 +6,9 @@ authorization — runtime adapters enforce credentials and access policies
 independently.
 
 Status: planned for v0.2.0; not implemented yet. See ``docs/PROGRESS.md``.
+
+E501 is reserved for this check; until then declared permissions are
+metadata only and are never treated as proof of authorization.
 """
 
 __all__ = ["PermissionAnalyzer"]
