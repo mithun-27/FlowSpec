@@ -12,6 +12,9 @@ already reported (E401) and there is no contract to check against.
 Expressions whose references did not resolve are skipped — they are
 already reported (E102/E103).
 
+The analyzer only reports: it never rewrites the AST, and it defers all
+compatibility decisions to the central type checker.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
