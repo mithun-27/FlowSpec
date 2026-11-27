@@ -5,6 +5,9 @@ references (``$input.email``), step output references
 (``$customer.customer_id``), primitive literals, and explicit ``null``.
 More complex expressions arrive in later releases.
 
+Every expression node is frozen and carries its own source location, so
+inference and diagnostics can point at the exact reference or literal.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
