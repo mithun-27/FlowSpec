@@ -7,6 +7,9 @@ unresolved variables (E103), and malformed input type declarations (E205).
 Resolution is order-independent — forward references are allowed as long
 as the dependency graph remains valid.
 
+Resolution runs before type checking, so later passes can assume every
+surviving reference already names a known symbol.
+
 Cascade prevention: a step whose tool is not registered is declared with
 ``contract_known=False`` so references *to* that step are not re-reported as
 unknown outputs; a workflow input with a malformed type is excluded from
