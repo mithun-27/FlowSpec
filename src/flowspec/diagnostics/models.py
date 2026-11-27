@@ -6,6 +6,9 @@ source location, expected/received values, and suggestions. The core
 compiler never depends on terminal formatting libraries; rendering lives
 in :mod:`flowspec.diagnostics.formatter` and the CLI.
 
+Records are frozen. Aggregation drops exact duplicates (same code, file,
+position, message, step, and severity) and sorts the rest deterministically.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
