@@ -23,6 +23,9 @@ Commands implemented for the v0.1.0 compiler foundation: ``version``,
 ``graph`` (v0.4.0), ``test``, ``validate-mcp`` (v0.3.0), and
 ``validate-openapi`` (v0.3.0) are not implemented yet; they report that
 honestly and exit with code 4. See ``docs/PROGRESS.md``.
+
+The CLI only renders compiler results; it never modifies them, and its
+output is deterministic and safe for every console encoding.
 """
 
 from __future__ import annotations
