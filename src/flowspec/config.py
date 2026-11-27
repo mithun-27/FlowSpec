@@ -9,6 +9,9 @@ Defaults are conservative: strict typing, cycle detection, permission
 validation, and IR generation are all on. Callers opt into permissive
 behavior explicitly rather than getting it by accident.
 
+``CompilerConfig`` is frozen: every pass sees the same snapshot for an
+entire run, so behavior never changes mid-compilation.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
