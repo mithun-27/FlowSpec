@@ -5,6 +5,9 @@ never store execution state. Syntax and semantic annotations are kept
 separate: nodes describe what the workflow *says*, later passes attach what
 it *means*.
 
+``SourceLocation.unknown`` supplies a placeholder when a parser cannot pin
+a position, keeping every node location-bearing.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
