@@ -19,6 +19,9 @@ project setup (such as a missing source file) is wrong; ``InternalError``
 means a compiler invariant was violated (CLI exit code 4), not that the
 workflow is invalid.
 
+Exception messages are plain text with no terminal escapes, so they are
+safe to embed in structured diagnostics and JSON output.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
