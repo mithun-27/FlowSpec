@@ -2,7 +2,8 @@
 
 Codes are part of the public contract and must never be reused or renamed.
 Categories group the codes; every diagnostic produced anywhere in the
-compiler carries one of these codes.
+compiler carries one of these codes. New conditions get new codes rather
+than reusing an existing code with a different meaning.
 
 ====== ============================================= ==========================
 Code   Category                                      Meaning
