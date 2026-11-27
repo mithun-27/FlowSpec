@@ -6,6 +6,9 @@ requirements. The registry tracks known tools and the universe of nominal
 type names their contracts declare — the basis for unknown-type policy
 (E203) on workflow input declarations.
 
+Definitions are frozen and registered by unique name; a duplicate
+registration is rejected rather than silently overwriting the first.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
