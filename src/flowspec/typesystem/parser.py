@@ -6,6 +6,9 @@ constructions such as ``List[InvoiceID]``, ``Optional[CustomerID]``,
 objects. Malformed expressions raise :class:`TypeParseError` (E205) with
 the position of the failure.
 
+Parsing is a pure function of the input string: configuration, environment,
+and registry state never affect the resulting type.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
