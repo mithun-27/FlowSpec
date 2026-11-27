@@ -9,6 +9,9 @@ Determinism: step ids keep declaration order; adjacency queries return
 sorted tuples; the serialized form sorts edges, so two compilations of
 the same workflow always produce identical graphs.
 
+The graph is read-only after construction; cycle detection, sorting, and
+scheduling consume it without mutating edges.
+
 Status: implemented for the v0.1.0 compiler foundation.
 """
 
